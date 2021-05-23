@@ -8,13 +8,13 @@ class Game:
 
     def __init__(self):
         #definir si le jeux a commencer
-        self.is_playing = True
+        self.is_playing = False
         #generer notre joueur
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)
         self.all_players.add(self.player)
         # generer l'evenement
-        self.comet_event = CometFallEvent()
+        self.comet_event = CometFallEvent(self)
         self.all_monsters = pygame.sprite.Group()
         self.pressed = {}
 
@@ -27,7 +27,9 @@ class Game:
     def game_over(self):
         #remettre le jeu a neuf
         self.all_monsters = pygame.sprite.Group()
+        self.comet_event.all_comets = pygame.sprite.Group()
         self.player.health = self.player.max_health
+        self.comet_event.reset_percent()
         self.is_playing = False
 
     def update(self, screen):
