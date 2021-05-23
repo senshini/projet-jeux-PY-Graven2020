@@ -8,7 +8,7 @@ class Player(pygame.sprite.Sprite):
         self.game = game
         self.health = 100
         self.max_health = 100
-        self.attack = 13
+        self.attack = 10
         self.velocity = 3
         self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.image.load('assets/player.png')
@@ -19,6 +19,9 @@ class Player(pygame.sprite.Sprite):
     def damage(self, amount):
         if self.health - amount > amount:
             self.health -= amount
+        else:
+            #si le joueur n'a plus de point de vie
+            self.game.game_over()
 
 
     def update_health_bar(self, surface):
@@ -35,6 +38,7 @@ class Player(pygame.sprite.Sprite):
         #si le joueur ne touche pas un monstre
         if not self.game.check_collision(self, self.game.all_monsters):
             self.rect.x += self.velocity
+
 
     def move_left(self):
         self.rect.x -=self.velocity
