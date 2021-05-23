@@ -1,4 +1,5 @@
 import pygame
+from comet import Comet
 
 # crée une classe pour gérer cet evenement
 class CometFallEvent:
@@ -7,6 +8,9 @@ class CometFallEvent:
     def __init__(self):
         self.percent = 0
         self.percent_speed = 33
+
+        # definir un groupe de sprite pour stocker nos cometes
+        self.all_comets = pygame.sprite.Group()
 
     def add_percent(self):
         self.percent += self.percent_speed / 100
@@ -17,10 +21,14 @@ class CometFallEvent:
     def reset_percent(self):
         self.percent = 0
 
+    def meteor_fall(self):
+        self.all_comets.add(Comet())
+
     def attempt_fall(self):
         # la jauge d'evenement est totalement chargé
         if self.is_full_loaded():
             print("Pluie de cometes !!")
+            self.meteor_fall()
             self.reset_percent()
 
     def update_bar(self, surface):

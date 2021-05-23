@@ -49,11 +49,18 @@ class Game:
             monster.forward()
             monster.update_health_bar(screen)
 
+        # recup les comets de notre jeu
+        for comet in self.comet_event.all_comets:
+            comet.fall()
+
         # appliquer l'ensemble des images de mon groupede projectiles
         self.player.all_projectiles.draw(screen)
 
         # appliquer l'ensemble des images de mon groupe de monstre
         self.all_monsters.draw(screen)
+
+        # appliquer l'ensemble des images de mon froupe de comettes
+        self.comet_event.all_comets.draw(screen)
 
         # vérifier si le joueur souhaite aller à gauche ou à droite
         if self.pressed.get(pygame.K_RIGHT) and self.player.rect.x + self.player.rect.width < screen.get_width():
