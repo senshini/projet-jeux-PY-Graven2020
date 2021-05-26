@@ -1,11 +1,12 @@
 import pygame
 import random
+import animation
 
 #crer une classe qui va gérer la notion de monstre
-class Monster(pygame.sprite.Sprite):
+class Monster(animation.AnimateSprite):
 
     def __init__(self, game):
-        super().__init__()
+        super().__init__("mummy")
         self.game = game
         self.health = 100
         self.max_health = 100
